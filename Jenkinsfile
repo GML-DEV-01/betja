@@ -12,7 +12,7 @@ pipeline {
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
 	CF_API_KEY = credentials('cf_api_key')
-	WBX_BASE_URL = 'https://webexapis.com/v1/webhooks/incoming/Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dFQkhPT0svZTZiZmU4NmQtYWU4ZS00MTJkLWEyNDMtNzVkZmMyYTk1YWRl'
+	WBX_BASE_URL = 'https://webexapis.com/v1/webhooks/incoming/Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dFQkhPT0svNzYwODA1NGEtOTZiZC00MGM1LThjMWMtMjc3MTk4YmIzNzI5'
     }
 
     stages {
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     
-                    def webhookUrl = 'https://webexapis.com/v1/webhooks/incoming/Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dFQkhPT0svZTZiZmU4NmQtYWU4ZS00MTJkLWEyNDMtNzVkZmMyYTk1YWRl'
+                    def webhookUrl = 'https://webexapis.com/v1/webhooks/incoming/Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dFQkhPT0svNzYwODA1NGEtOTZiZC00MGM1LThjMWMtMjc3MTk4YmIzNzI5'
                     def jobName = "${env.JOB_NAME}"
 		    env.GIT_COMMITTER_NAME = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
                     def payload = """
@@ -122,7 +122,7 @@ pipeline {
             steps {
                 script {
                     
-                    def webhookUrl = 'https://webexapis.com/v1/webhooks/incoming/Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dFQkhPT0svZTZiZmU4NmQtYWU4ZS00MTJkLWEyNDMtNzVkZmMyYTk1YWRl'
+                    def webhookUrl = 'https://webexapis.com/v1/webhooks/incoming/Y2lzY29zcGFyazovL3VybjpURUFNOmV1LWNlbnRyYWwtMV9rL1dFQkhPT0svNzYwODA1NGEtOTZiZC00MGM1LThjMWMtMjc3MTk4YmIzNzI5'
                     def buildNumber = "${env.BUILD_NUMBER}"
                     def jobName = "${env.JOB_NAME}"
 		    env.GIT_COMMITTER_NAME = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
