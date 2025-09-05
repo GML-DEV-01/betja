@@ -182,7 +182,7 @@ pipeline {
 		env.GIT_COMMITTER_NAME = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
                 def payload = """
                     {
-                        "markdown": "Jenkins Pipeline: ${jobName}, Build number: ${buildNumber} has run with Status: ${FinalStatus}. Please check email brian.t@goldmedialab.com for a console log output with the errors.The pipeline was triggered by: ${GIT_COMMITTER_NAME}"
+                        "markdown": "Jenkins Pipeline: ${jobName}, Build number: ${buildNumber} has run with Status: ${FinalStatus}. Please check email freddie@goldmedialab.com for a console log output with the errors.The pipeline was triggered by: ${GIT_COMMITTER_NAME}"
                     }
                     """
                 def headers = ['Content-Type: application/json']
@@ -227,7 +227,7 @@ pipeline {
 emailext (
     subject: "${jobName} - Build ${buildNumber} - ${pipelineStatus.toUpperCase()}",
     body: body,
-    to: 'brian.t@goldmedialab.com,avi.swarnkar@enexuss.com',
+    to: 'brian.t@goldmedialab.com,freddie@goldmedialab.com',
     from: 'jenkins_alerts@goldmedialab.com',
     replyTo: 'jenkins_alerts@goldmedialab.com',
     mimeType: 'text/html'
