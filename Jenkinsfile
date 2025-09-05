@@ -128,7 +128,7 @@ pipeline {
 		    env.GIT_COMMITTER_NAME = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
                     def payload = """
                     {
-                        "markdown": "Jenkins Pipeline: ${jobName}, Build number: ${buildNumber} has run with Status: SUCCESS. Please check url at https://stage-btj.bogaminglab.com . The pipeline was triggered by: ${GIT_COMMITTER_NAME}"
+                        "markdown": "Jenkins Pipeline: ${jobName}, Build number: ${buildNumber} has run with Status: SUCCESS. Please check url at https://stage-betja.bogaminglab.com . The pipeline was triggered by: ${GIT_COMMITTER_NAME}"
                     }
                     """
                     def headers = ['Content-Type: application/json']
@@ -151,7 +151,7 @@ pipeline {
                     def payload = """
                     {
                         "JobName": "${jobName}",
-                        "Site": "https://stage-btj.bogaminglab.com",
+                        "Site": "https://stage-betja.bogaminglab.com",
                         "liveUrl": "${GIT_COMMIT_MSG}"
                     }
                     """
