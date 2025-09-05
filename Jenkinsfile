@@ -74,7 +74,7 @@ pipeline {
                sh 'ls'
 	           sh 'npm install'
 		   sh 'node --version'
-	           sh 'npm run build:joka'
+	           sh 'npm run build'
 	           sh 'ls'
 	           sh 'sudo zip -r dist-$(date +"%d-%m-%y").zip dist'
             }
