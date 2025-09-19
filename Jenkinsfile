@@ -227,7 +227,7 @@ pipeline {
 emailext (
     subject: "${jobName} - Build ${buildNumber} - ${pipelineStatus.toUpperCase()}",
     body: body,
-    to: 'brian.t@goldmedialab.com,freddie@goldmedialab.com,hayley@goldmedialab.com',
+    to: 'brian.t@goldmedialab.com,freddie@goldmedialab.com,hayley@goldmedialab.com,lee@goldmedialab.com',
     from: 'jenkins_alerts@goldmedialab.com',
     replyTo: 'jenkins_alerts@goldmedialab.com',
     mimeType: 'text/html'
