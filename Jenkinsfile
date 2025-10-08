@@ -52,7 +52,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                withSonarQubeEnv('qube') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=BETJA-DEV -Dsonar.projectKey=BETJA-DEV \
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=BETJA-PROD -Dsonar.projectKey=BETJA-PROD \
 	                        -Dsonar.java.binaries-. \
 	                        -Dsonar.scm.provider=git '''
                 }
@@ -84,7 +84,7 @@ pipeline {
             steps {
 	        	withAWS(region: 'ap-southeast-1', credentials: '427499a7-0197-438e-bf25-87f4b6fb2702'){
                     sh 'ls -la'
-	                sh 'aws s3 cp dist-$(date +"%d-%m-%y").zip s3://gml-jenkins-jpt/BETJA/DEV/'
+	                sh 'aws s3 cp dist-$(date +"%d-%m-%y").zip s3://gml-jenkins-jpt/BETJA/PROD/'
 		        }
             }
         }	    
@@ -92,8 +92,8 @@ pipeline {
         stage('Dist Deployment to Staging Server') {
             steps {
                sshagent(['staging_do']) {
-                    sh 'ssh -o StrictHostKeyChecking=no brian@128.199.105.148 rm -r /var/www/html/frontEnd/betja-dev/*'
-                    sh 'scp -r dist/* brian@128.199.105.148:/var/www/html/frontEnd/betja-dev/'
+                    sh 'ssh -o StrictHostKeyChecking=no brian@128.199.105.148 rm -r /var/www/html/frontEnd/betja-prod/*'
+                    sh 'scp -r dist/* brian@128.199.105.148:/var/www/html/frontEnd/betja-prod/'
                 }               
             }
         }
@@ -128,7 +128,7 @@ pipeline {
 		    env.GIT_COMMITTER_NAME = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
                     def payload = """
                     {
-                        "markdown": "Jenkins Pipeline: ${jobName}, Build number: ${buildNumber} has run with Status: SUCCESS. Please check url at https://dev-betja.bogaminglab.com . The pipeline was triggered by: ${GIT_COMMITTER_NAME}"
+                        "markdown": "Jenkins Pipeline: ${jobName}, Build number: ${buildNumber} has run with Status: SUCCESS. Please check url at https://www.betja.com . The pipeline was triggered by: ${GIT_COMMITTER_NAME}"
                     }
                     """
                     def headers = ['Content-Type: application/json']
@@ -151,7 +151,7 @@ pipeline {
                     def payload = """
                     {
                         "JobName": "${jobName}",
-                        "Site": "https://dev-betja.bogaminglab.com",
+                        "Site": "https://www.betja.com",
                         "liveUrl": "${GIT_COMMIT_MSG}"
                     }
                     """
