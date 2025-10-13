@@ -52,7 +52,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                withSonarQubeEnv('qube') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=BETJA-PROD -Dsonar.projectKey=BETJA-PROD \
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=BETJA-PROD-3 -Dsonar.projectKey=BETJA-PROD-3 \
 	                        -Dsonar.java.binaries-. \
 	                        -Dsonar.scm.provider=git '''
                 }
@@ -84,7 +84,7 @@ pipeline {
             steps {
 	        	withAWS(region: 'ap-southeast-1', credentials: '427499a7-0197-438e-bf25-87f4b6fb2702'){
                     sh 'ls -la'
-	                sh 'aws s3 cp dist-$(date +"%d-%m-%y").zip s3://gml-jenkins-jpt/BETJA/PROD/'
+	                sh 'aws s3 cp dist-$(date +"%d-%m-%y").zip s3://gml-jenkins-jpt/BETJA/PROD-3/'
 		        }
             }
         }	    
