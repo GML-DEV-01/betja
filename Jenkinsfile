@@ -106,7 +106,7 @@ pipeline {
             zip -r dist-$(date +"%d-%m-%y").zip dist
         '''
     }
-}
+
 
         }
         
