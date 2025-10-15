@@ -6,7 +6,7 @@ pipeline {
     
     tools{
         jdk 'jdk'
-        nodejs '20.19.3'
+        nodejs '24.10.0'
     }
     
     environment {
