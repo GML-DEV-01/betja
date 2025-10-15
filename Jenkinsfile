@@ -67,7 +67,7 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        /**stage('Build') {
             steps {
                sh 'npm cache clean --force'
                sh 'rm -rf node_modules'
@@ -77,7 +77,37 @@ pipeline {
 	           sh 'npm run build'
 	           sh 'ls'
 	           sh 'sudo zip -r dist-$(date +"%d-%m-%y").zip dist'
-            }
+            }**/
+		stage('Build') {
+    steps {
+        sh '''
+            # Clean up
+            npm cache clean --force || true
+            rm -rf node_modules
+
+            # Install pnpm if not already installed
+            if ! command -v pnpm &> /dev/null
+            then
+              echo "Installing pnpm globally..."
+              npm install -g pnpm
+            fi
+
+            # Confirm pnpm version
+            pnpm --version
+            node --version
+
+            # Install dependencies using pnpm
+            pnpm install
+
+            # Build the project
+            pnpm run build
+
+            # Zip the dist directory with date
+            zip -r dist-$(date +"%d-%m-%y").zip dist
+        '''
+    }
+}
+
         }
         
         stage('Dist.zip BackUp To S3 Bucket') {
